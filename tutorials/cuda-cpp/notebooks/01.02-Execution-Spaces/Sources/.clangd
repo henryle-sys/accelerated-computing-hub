@@ -5,6 +5,8 @@ CompileFlags:
     "--cuda-path=/usr/local/cuda",
     "--no-cuda-version-check",
     "-I/usr/include/c++/13",
+    "-I/usr/local/cuda/targets/x86_64-linux/include",
+    "-I/usr/local/cuda/targets/x86_64-linux/include/cccl",
   ]
   Remove: [
     "-gencode*",

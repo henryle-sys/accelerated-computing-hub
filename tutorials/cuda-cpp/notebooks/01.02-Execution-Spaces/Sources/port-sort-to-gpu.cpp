@@ -1,4 +1,5 @@
 #include "ach.h"
+#include <algorithm>
 
 float median(thrust::universal_vector<float> vec)
 {

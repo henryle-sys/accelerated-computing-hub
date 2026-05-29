@@ -30,15 +30,18 @@ static __host__ __device__ const char *execution_space() {
 }
 
 static double max_bandwidth() {
-  cudaDeviceProp prop;
-  cudaGetDeviceProperties(&prop, 0);
+    cudaDeviceProp prop;
+    cudaGetDeviceProperties(&prop, 0);
 
-  const std::size_t mem_freq =
-      static_cast<std::size_t>(prop.memoryClockRate) * 1000; // kHz -> Hz
-  const int bus_width = prop.memoryBusWidth;
-  const std::size_t bytes_per_second = 2 * mem_freq * bus_width / CHAR_BIT;
-  return static_cast<double>(bytes_per_second) / 1024 / 1024 /
-         1024; // B/s -> GB/s
+#if (CUDART_VERSION < 13000)
+    const std::size_t mem_freq =
+        static_cast<std::size_t>(prop.memoryClockRate) * 1000; // kHz -> Hz
+    const int bus_width = prop.memoryBusWidth;
+    const std::size_t bytes_per_second = 2 * mem_freq * bus_width / CHAR_BIT;
+    return static_cast<double>(bytes_per_second) / 1024 / 1024 / 1024;
+#else
+    return 0.0; // memoryClockRate removed in CUDA 13+
+#endif
 }
 
 __host__ __device__ void where_am_I(const char *expected) {

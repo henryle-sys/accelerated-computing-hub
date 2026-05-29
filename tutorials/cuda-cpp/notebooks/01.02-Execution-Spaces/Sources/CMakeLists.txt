@@ -15,10 +15,11 @@ add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 find_package(CUDAToolkit REQUIRED)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE
-        CUDA::cudart
-)
+target_link_libraries(${PROJECT_NAME} PRIVATE CUDA::cudart)
 
 target_include_directories(${PROJECT_NAME} PRIVATE
         ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES}
+        /usr/local/cccl/thrust
+        /usr/local/cccl/cub
+        /usr/local/cccl/libcudacxx/include
 )
