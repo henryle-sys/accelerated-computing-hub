@@ -1,0 +1,13 @@
+CompileFlags:
+  Add: [
+    "-xcuda",
+    "--cuda-host-only",
+    "--cuda-path=/usr/local/cuda",
+    "--no-cuda-version-check",
+    "-I/usr/include/c++/13",
+  ]
+  Remove: [
+    "-gencode*",
+    "--generate-code*",
+    "-rdc=*",
+  ]
