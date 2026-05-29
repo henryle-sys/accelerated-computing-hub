@@ -18,7 +18,7 @@ int main()
     std::printf("step  median\n");
     for (int step = 0; step < 3; step++) {
         thrust::transform(thrust::device, temp.begin(), temp.end(), temp.begin(), transformation);
-        float median_temp = median(temp);
+        const float median_temp = median(temp);
         std::printf("%d     %.2f\n", step, median_temp);
     }
 }

@@ -1,15 +1,20 @@
 CompileFlags:
-  Add: [
-    "-xcuda",
-    "--cuda-host-only",
-    "--cuda-path=/usr/local/cuda",
-    "--no-cuda-version-check",
-    "-I/usr/include/c++/13",
-    "-I/usr/local/cuda/targets/x86_64-linux/include",
-    "-I/usr/local/cuda/targets/x86_64-linux/include/cccl",
-  ]
-  Remove: [
-    "-gencode*",
-    "--generate-code*",
-    "-rdc=*",
-  ]
+  Add:
+    - -x
+    - cuda
+    - --cuda-path=/usr/local/cuda
+    - --cuda-gpu-arch=sm_86
+    - -D__CUDACC__
+    - -D__CUDACC_VER_MAJOR__=12
+    - -D__CUDACC_VER_MINOR__=0
+    - -D_FORCE_INLINES
+    - -DTHRUST_IGNORE_CUB_VERSION_CHECK
+    - -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA
+    - -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP
+    - -D__CUDA_ARCH__=860
+  Remove:
+    - -forward-unknown-to-host-compiler
+
+Diagnostics:
+  Suppress:
+    - drv_unknown_argument
